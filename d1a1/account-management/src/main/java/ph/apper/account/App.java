@@ -16,6 +16,7 @@ public class App {
 
     @Bean
     public RestTemplate restTemplate() { return new RestTemplate(); }
+
     @RestController
     @RequestMapping("account")
     public static class AccountController {
@@ -38,7 +39,7 @@ public class App {
                     restTemplate.postForEntity("http://localhost:8081/activity", activity, Object.class);
 
             if (response.getStatusCode().is2xxSuccessful()){
-                System.out.println("Successs");
+                System.out.println("Success");
             } else {
                 System.out.println("Err: " + response.getStatusCode());
             }
