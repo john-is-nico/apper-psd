@@ -1,9 +1,11 @@
 package ph.apper.account;
 
 import lombok.Data;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
+import org.springframework.core.env.Environment;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.client.RestTemplate;
@@ -27,6 +29,9 @@ public class App {
             this.restTemplate = restTemplate;
         }
 
+        @Autowired
+        Environment environment;
+
         @PostMapping
         public ResponseEntity register(@RequestBody CreateAccountRequest request){
             System.out.println(request);
@@ -36,7 +41,7 @@ public class App {
             activity.setIdentifier("email="+request.getEmail());
 
             ResponseEntity<Object> response =
-                    restTemplate.postForEntity("http://localhost:8081/activity", activity, Object.class);
+                    restTemplate.postForEntity(environment.getProperty("activity.url"), activity, Object.class);
 
             if (response.getStatusCode().is2xxSuccessful()){
                 System.out.println("Success");
