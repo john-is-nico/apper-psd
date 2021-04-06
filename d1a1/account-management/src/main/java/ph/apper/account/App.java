@@ -4,6 +4,7 @@ import lombok.Data;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.context.ApplicationPidFileWriter;
 import org.springframework.context.annotation.Bean;
 import org.springframework.core.env.Environment;
 import org.springframework.http.ResponseEntity;
@@ -13,7 +14,9 @@ import org.springframework.web.client.RestTemplate;
 @SpringBootApplication
 public class App {
     public static void main(String[] args) {
-        SpringApplication.run(App.class, args);
+        SpringApplication application = new SpringApplication(App.class);
+        application.addListeners(new ApplicationPidFileWriter());
+        application.run(args);
     }
 
     @Bean
