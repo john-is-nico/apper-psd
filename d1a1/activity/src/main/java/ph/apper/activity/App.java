@@ -31,7 +31,7 @@ public class App {
     }
 
     @Data
-    public static calss Request {
+    public static class Request {
         private String action;
         private String Identifier;
     }

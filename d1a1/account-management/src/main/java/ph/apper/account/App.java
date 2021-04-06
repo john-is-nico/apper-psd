@@ -17,7 +17,7 @@ public class App {
 
     @RestController
     @RequestParam("account")
-    public static class ActivityController {
+    public static class AccountController {
 
         @PostMapping
         public ResponseEntity create(@RequestBody Request request){
@@ -30,8 +30,10 @@ public class App {
     }
 
     @Data
-    public static calss Request {
-        private String action;
-        private String Identifier;
+    public static class CreateAccountRequest {
+        private String firstName;
+        private String lastName;
+        private String Email;
+        private String Password;
     }
 }
