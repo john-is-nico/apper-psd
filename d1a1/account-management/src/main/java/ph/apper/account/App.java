@@ -44,7 +44,7 @@ public class App {
             activity.setIdentifier("email="+request.getEmail());
 
             ResponseEntity<Object> response =
-                    restTemplate.postForEntity(environment.getProperty("activity.url"), activity, Object.class);
+                    restTemplate.postForEntity(environment.getProperty("local.url"), activity, Object.class);
 
             if (response.getStatusCode().is2xxSuccessful()){
                 System.out.println("Success");
